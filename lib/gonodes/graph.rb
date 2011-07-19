@@ -3,33 +3,29 @@ require 'forwardable'
 module GoNodes
   
   class Graph
-    extend Forwardable
-
-    def_delegators :@nodes_instance, :generate_nodes, :generate_named_nodes, :nodes
-    def_delegators :@edges_instance, :generate_edges, :edges
 
     attr_reader :completeness
     
     def initialize(args={})
       
-      @nodes_instance = Nodes.new
-      @edges_instance = Edges.new
+      @node_list = NodeList.new
+      @edge_list = EdgeList.new
 
-      generate_nodes(args[:nodes])            if args[:nodes]
-      generate_named_nodes(args[:node_names]) if args[:node_names]
+      @node_list.populate_with_count(args[:node_count])  if args[:node_count]
+      @node_list.populate_with_names(args[:node_names])  if args[:node_names]
       
-      generate_edges(args[:completeness])     if args[:completeness]
+      @edge_list.generate_edges(args[:completeness])     if args[:completeness]
       
     end
 
+    def nodes
+      @node_list.nodes
+    end
     
-    #puts "BCDA: #{numberize_alpha('CRXP')}"
-    # puts "DDAB: #{numberize_alpha('POTATO')}"
-    # 
-    # 
-    # puts "52: #{alpha_numberize(64 * 1024)}"
-    # puts "53: #{alpha_numberize(197309387)}"
-    # 
+    def edges
+      @edge_list.edges
+    end
+
   end
   
 end
