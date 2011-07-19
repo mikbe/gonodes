@@ -17,8 +17,8 @@ describe GoNodes::NodeList do
     end
     
     it "should initialize using an array of node names" do
-      node_list = GoNodes::NodeList.new_with_names([:A,:B,:C,:D,:E,:F,:G])
-      node_list.last.name.should == :G
+      node_list = GoNodes::NodeList.new_with_names(%w{A B C D E F G})
+      node_list.last.name.should == "G"
     end
     
   end

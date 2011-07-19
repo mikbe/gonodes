@@ -67,4 +67,12 @@ describe GoNodes::EdgeList do
 
   end
 
+  context "when mapping edges to nodes" do
+    
+    it "should link to two nodes" do
+      
+    end
+    
+  end
+
 end

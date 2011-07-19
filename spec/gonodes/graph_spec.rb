@@ -6,12 +6,12 @@ describe GoNodes::Graph do
 
   context "When creating nodes" do
     
-    it "should create the specified number of nodes when initialized" do
+    it "should create the specified number of nodes" do
       graph = GoNodes::Graph.new(node_count: 4)
       graph.nodes.count.should == 4
     end
     
-    it "should create nodes using a provided array of names when initialized" do
+    it "should create nodes using a provided array of names" do
       graph = GoNodes::Graph.new(node_names: %w{D E F 7 5 4})
       graph.nodes.collect{|node| node.name}.sort.should == %w{D E F 7 5 4}.sort
     end
