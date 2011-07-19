@@ -3,6 +3,7 @@ require 'spec_helper'
 describe GoNodes::Node do
   
   describe "a new node" do
+    
     it "should set the specified name" do
       node = GoNodes::Node.new(:A)
       node.name.should == :A

@@ -18,20 +18,4 @@ describe GoNodes::Graph do
     
   end
 
-  context "When generating edges" do
-  
-  end
-
-  context "When naming edges" do
-    
-  end
-
-  context "When compairing edges" do
-    
-    
-    
-    it "should equate edges ab to ba if they are bidirectional"
-    
-  end
-
 end
