@@ -22,6 +22,10 @@ module GoNodes
       node_list.populate_with_names(names)
       node_list
     end
+
+    def add(node)
+      super(node.is_a?(Node) ? node : Node.new(node))
+    end
     
     def [](node_name)
       @nodes.select{|node,_| node.name == node_name}.first
@@ -29,6 +33,12 @@ module GoNodes
 
     def ==(other_node_list)
       self.sort == other_node_list.sort
+    end
+
+    def populate(population)
+      population.is_a?(Fixnum) ? 
+        populate_with_count(population) : 
+        populate_with_names(population)
     end
 
     def populate_with_count(node_count)

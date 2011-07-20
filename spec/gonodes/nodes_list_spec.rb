@@ -86,7 +86,15 @@ describe GoNodes::NodeList do
     node_list = GoNodes::NodeList.new_with_names(%w{A B})
     
     node_list.to_s.should == "A, B"
-
   end
+
+  it "should add a GoNodes::Node using a name" do
+    node_list = GoNodes::NodeList.new_with_names(%w{A B})
+    
+    node_list.add("C")
+    node_list.last.should == GoNodes::Node.new("C")
+  end
+
+
 
 end
