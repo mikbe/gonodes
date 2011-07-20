@@ -6,7 +6,7 @@ If you need to create simple (in the mathematical sense), weighted graphs with
 random values for the connections and weights then this is the gem for you.
 
 ## Install
-`$ gem install gonodes`
+`$ gem install GoNodes`
 
 ## Instructions
 The main entry into the app is the GoNodes::Graph class so I'll only cover  
