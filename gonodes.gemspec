@@ -3,8 +3,8 @@ $:.push File.expand_path("../lib", __FILE__)
 require "gonodes/version"
 
 Gem::Specification.new do |s|
-  s.name        = "gonodes"
-  s.version     = Gonodes::VERSION
+  s.name        = "GoNodes"
+  s.version     = GoNodes::VERSION
   s.authors     = ["Mike Bethany"]
   s.email       = ["mikbe.tk@gmail.com"]
   s.homepage    = "http://mikbe.tk/projects#gonodes"
