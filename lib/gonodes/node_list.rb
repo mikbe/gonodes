@@ -1,12 +1,14 @@
-require "delegate"
-
 module GoNodes
 
-  class NodeList < DelegateClass(Array)
+  class NodeList < DelegateClass(Set)
 
     def initialize
-      @nodes = []
+      @nodes = Set.new
       super(@nodes)
+    end
+
+    def to_s
+      @nodes.to_a.join(", ")
     end
 
     def self.new_with_count(count)
@@ -21,6 +23,14 @@ module GoNodes
       node_list
     end
     
+    def [](node_name)
+      @nodes.select{|node,_| node.name == node_name}.first
+    end
+
+    def ==(other_node_list)
+      self.sort == other_node_list.sort
+    end
+
     def populate_with_count(node_count)
       return unless node_count
       alpha = "A"

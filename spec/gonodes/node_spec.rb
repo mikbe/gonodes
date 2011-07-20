@@ -14,13 +14,7 @@ describe GoNodes::Node do
       node.name.should == node.object_id
     end
 
-    it 'should not change its name if the object that originally specified its name changes' do
-      name = "A"
-      node = GoNodes::Node.new(name)
-      expect{name.succ!}.should_not change(node, :name) 
-    end
-
-    it 'should set any type of number as its name' do
+    it "should set any type of number as its name" do
       require 'bigdecimal'
       numbers = [42, 4.2, BigDecimal("#{Math::PI}")]
       numbers.collect {|name| GoNodes::Node.new(name).name}.should == numbers
@@ -31,15 +25,29 @@ describe GoNodes::Node do
     end
 
   end
+
+  it 'should not change its name if the object that originally specified its name changes' do
+    name = "A"
+    node = GoNodes::Node.new(name)
+    expect{name.succ!}.should_not change(node, :name) 
+  end
+    
+  it "should equate two nodes with the same name" do
+    node1 = GoNodes::Node.new("A")
+    node2 = GoNodes::Node.new("A")
+    node1.should == node2
+  end
   
-  context "when comparing" do
+  it "should sort by node name" do
+    node1 = GoNodes::Node.new("Z")
+    node2 = GoNodes::Node.new("A")
     
-    it "should be able to tell two nodes apart even if they have the same name" do
-      node1 = GoNodes::Node.new("A")
-      node2 = GoNodes::Node.new("A")
-      node1.should_not == node2
-    end
-    
+    [node1, node2].sort.should == [node2, node1]
+  end
+  
+  it "should output its name when printed" do
+    node1 = GoNodes::Node.new("Z")
+    node1.to_s.should == "Z"
   end
   
 end
