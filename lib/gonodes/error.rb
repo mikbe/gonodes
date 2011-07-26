@@ -1,9 +1,8 @@
 module GoNodes
   
-  module Error
+  module Errors
     
-    exceptions = [:BadNodeName] # %{NoNodeName SomeOtherError}
-    exceptions.each {|e| const_set(e, Class.new(StandardError))}
+    BadNodeName = Class.new(StandardError)
     
   end
 end

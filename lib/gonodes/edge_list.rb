@@ -11,7 +11,7 @@ module GoNodes
     end
     
     def to_s
-      @edges.map{|edge| edge.to_s}.join("\n\n")
+      map{|edge| edge.to_s}.join("\n\n")
     end
 
     def self.new_with_count(params)
@@ -25,7 +25,7 @@ module GoNodes
     end
 
     def ==(other_edge_list)
-      self.sort == other_edge_list.sort
+      sort == other_edge_list.sort
     end
     
     def populate_with_count(edge_count)
@@ -33,15 +33,14 @@ module GoNodes
       
       node_list_combo = possible_edges.cycle
       
-      @edges.clear
-      edge_count.times do
+      clear
+      edge_count.times.collect do
         start_node, end_node = node_list_combo.next
-        @edges << Edge.new(
+        self << Edge.new(
           start_node: start_node,
           end_node:   end_node 
         )
       end
-      self
     end
 
     def populate_with_completeness(completeness)
@@ -50,8 +49,7 @@ module GoNodes
     end
 
     def add_edge(edge_params)
-      @edges << Edge.new(edge_params)
-      self
+      self << Edge.new(edge_params)
     end
 
     def normalized_edge_count(completeness)

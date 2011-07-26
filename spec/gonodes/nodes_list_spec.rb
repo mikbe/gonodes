@@ -8,12 +8,12 @@ describe GoNodes::NodeList do
     
     it "should initialize using a number of nodes" do
       node_list = GoNodes::NodeList.new_with_count(15)
-      node_list.last.name.should == "O"
+      node_list.count.should == 15
     end
     
     it "should initialize using an array of node names" do
       node_list = GoNodes::NodeList.new_with_names(%w{A B C D E F G})
-      node_list.last.name.should == "G"
+      node_list.map{|node|node.name}.should == %w{A B C D E F G}
     end
     
   end
@@ -32,7 +32,7 @@ describe GoNodes::NodeList do
     
     it "should name nodes alphabetically" do
       node_list.populate_with_count(4)
-      node_list.last.name.should == "D"
+      node_list["D"].should_not be_nil
     end
     
     it "should name nodes alphabetically" do
@@ -42,12 +42,12 @@ describe GoNodes::NodeList do
   
     it "should name nodes uniquely when there are more than 26 node_list" do
       node_list.populate_with_count(64 * 1024)
-      node_list.last.name.should == "CRXP"
+      node_list["CRXP"].should_not be_nil
     end
   
     it "should create nodes using an array of node names" do
       node_list.populate_with_names(%w{A B C 1 2 3})
-      node_list.collect{|node| node.name}.sort.should == %w{A B C 1 2 3}.sort
+      node_list.map{|node| node.name}.sort.should == %w{A B C 1 2 3}.sort
     end
     
   end
@@ -59,14 +59,16 @@ describe GoNodes::NodeList do
       node_list["A"].should eql(node_list.first)
     end
     
-    it "should not use the index of keys but the keys themselves" do
+    it "should not use an index on the keys but the keys themselves" do
       node_list.populate_with_names([10,11,12,13])
       node_list[0].should be_nil
     end
     
     it "should return the correct node when using numbers" do
       node_list.populate_with_names([10.4,11.6,12.1,13.78])
-      node_list[13.78].should eql(node_list.last)
+      node_list[12.1].should eql(
+        node_list.select{|node| node.name == 12.1}.first
+      )
     end
     
   end
@@ -92,7 +94,7 @@ describe GoNodes::NodeList do
     node_list = GoNodes::NodeList.new_with_names(%w{A B})
     
     node_list.add("C")
-    node_list.last.should == GoNodes::Node.new("C")
+    node_list["C"].should == GoNodes::Node.new("C")
   end
 
 

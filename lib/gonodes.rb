@@ -1,8 +1,6 @@
 require "delegate"
 require "set"
 
-require "monkeypatch/set"
-
 require "gonodes/version"
 
 require "gonodes/error"

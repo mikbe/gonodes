@@ -20,13 +20,14 @@ describe GoNodes::Node do
       numbers.collect {|name| GoNodes::Node.new(name).name}.should == numbers
     end
 
-    it "should raise an exception if something other than alphanumerics or numbers are given as a name" do
-      expect{GoNodes::Node.new(String)}.should raise_error(GoNodes::Error::BadNodeName)
+    it "should raise an exception if other than alphanumerics used for name" do
+      expect{GoNodes::Node.new(String)}.should
+       raise_error(GoNodes::Errors::BadNodeName)
     end
 
   end
 
-  it 'should not change its name if the object that originally specified its name changes' do
+  it 'should not change name if the object that specified its name changes' do
     name = "A"
     node = GoNodes::Node.new(name)
     expect{name.succ!}.should_not change(node, :name) 
